@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("postgres", "postgres://postgres:password@localhost:5432/coupons?sslmode=disable")
+	db, err := sql.Open("postgres", "postgres://postgres:rspp@localhost:5432/coupon?sslmode=disable")
 	if err != nil {
 		log.Fatalf("Failed to connect to DB: %v", err)
 	}

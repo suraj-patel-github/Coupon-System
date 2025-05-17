@@ -31,8 +31,8 @@ func (r *postgresRepository) CreateCoupon(c Coupon) error {
         max_usage_per_user, terms_and_conditions, discount_target)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING id
     `,
-        c.CouponCode, c.ExpiryDate, c.UsageType, c.MinOrderValue,
-        c.ValidFrom, c.ValidUntil, c.DiscountType, c.DiscountValue,
+        c.CouponCode, c.ExpiryDate.ToTime(), c.UsageType, c.MinOrderValue,
+        c.ValidFrom.ToTime(), c.ValidUntil.ToTime(), c.DiscountType, c.DiscountValue,
         c.MaxUsagePerUser, c.TermsAndConditions, c.DiscountTarget,
     ).Scan(&id)
     if err != nil {

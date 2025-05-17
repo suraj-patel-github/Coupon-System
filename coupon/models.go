@@ -1,41 +1,44 @@
 package coupon
 
-import "time"
+import (
+	"coupon-system/types"
+	"time"
+)
 
 type Coupon struct {
-    ID                   int
-    CouponCode           string
-    ExpiryDate           time.Time
-    UsageType            string
-    MinOrderValue        float64
-    ValidFrom            time.Time
-    ValidUntil           time.Time
-    DiscountType         string
-    DiscountValue        float64
-    MaxUsagePerUser      int
-    TermsAndConditions   string
-    DiscountTarget       string
-    ApplicableMedicines  []string
-    ApplicableCategories []string
+	ID                   int            `json:"id"` // Usually set by the DB, can be omitted in creation
+	CouponCode           string         `json:"couponCode"`
+	ExpiryDate           types.DateOnly `json:"expiryDate"`
+	UsageType            string         `json:"usageType"`
+	MinOrderValue        float64        `json:"minOrderValue"`
+	ValidFrom            types.DateOnly `json:"validFrom"`
+	ValidUntil           types.DateOnly `json:"validUntil"`
+	DiscountType         string         `json:"discountType"`
+	DiscountValue        float64        `json:"discountValue"`
+	MaxUsagePerUser      int            `json:"maxUsagePerUser"`
+	TermsAndConditions   string         `json:"termsAndConditions"`
+	DiscountTarget       string         `json:"discountTarget"`
+	ApplicableMedicines  []string       `json:"applicableMedicines"`
+	ApplicableCategories []string       `json:"applicableCategories"`
 }
 
 type CartItem struct {
-    ID       string `json:"id"`
-    Category string `json:"category"`
+	ID       string `json:"id"`
+	Category string `json:"category"`
 }
 
 type ValidateRequest struct {
-    CouponCode string     `json:"coupon_code"`
-    CartItems  []CartItem `json:"cart_items"`
-    OrderTotal float64    `json:"order_total"`
-    Timestamp  time.Time  `json:"timestamp"`
+	CouponCode string     `json:"couponCode"`
+	CartItems  []CartItem `json:"cartItems"`
+	OrderTotal float64    `json:"orderTotal"`
+	Timestamp  time.Time  `json:"timestamp"`
 }
 
 type ValidateResponse struct {
-    IsValid bool   `json:"is_valid"`
-    Message string `json:"message,omitempty"`
-    Discount struct {
-        ItemsDiscount   float64 `json:"items_discount,omitempty"`
-        ChargesDiscount float64 `json:"charges_discount,omitempty"`
-    } `json:"discount,omitempty"`
+	IsValid  bool   `json:"isValid"`
+	Message  string `json:"message,omitempty"`
+	Discount struct {
+		ItemsDiscount   float64 `json:"itemsDiscount,omitempty"`
+		ChargesDiscount float64 `json:"chargesDiscount,omitempty"`
+	} `json:"discount,omitempty"`
 }

@@ -79,7 +79,7 @@ func (s *couponService) ValidateCoupon(ctx context.Context, req ValidateRequest)
 
 	}
 
-	if !validateCoupon(coupon, req.CartItems, req.OrderTotal, req.Timestamp) {
+	if !validateCoupon(coupon, req.CartItems, req.OrderTotal, req.Timestamp.ToTime()) {
 		return ValidateResponse{
 			IsValid: false,
 			Message: "Coupon is not applicable or expired",

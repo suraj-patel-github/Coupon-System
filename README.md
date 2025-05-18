@@ -53,8 +53,6 @@ go mod tidy
 go run cmd/couponservice/main.go
 
 
-
-
 coupon-system/
 ├── main.go
 ├── coupon/
@@ -72,3 +70,6 @@ coupon-system/
 ├── go.sum
 ├── Dockerfile
 └── README.md
+
+# postgresql connection string for local
+export POSTGRES_CONNECTION_STRING="postgres://postgres:rspp@localhost:5432/coupon?sslmode=disable"

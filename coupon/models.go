@@ -3,7 +3,6 @@ package coupon
 import (
 	"coupon-system/types"
 	"fmt"
-	"time"
 )
 
 type Coupon struct {
@@ -29,10 +28,10 @@ type CartItem struct {
 }
 
 type ValidateRequest struct {
-	CouponCode string     `json:"couponCode"`
-	CartItems  []CartItem `json:"cartItems"`
-	OrderTotal float64    `json:"orderTotal"`
-	Timestamp  time.Time  `json:"timestamp"`
+	CouponCode string         `json:"couponCode"`
+	CartItems  []CartItem     `json:"cartItems"`
+	OrderTotal float64        `json:"orderTotal"`
+	Timestamp  types.DateOnly `json:"timestamp"`
 }
 
 type ValidateResponse struct {

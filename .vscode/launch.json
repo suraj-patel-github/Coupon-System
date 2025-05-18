@@ -9,7 +9,8 @@
             "program": "${workspaceFolder}/main.go",
             "args": [],
             "env": {
-                "GO_ENV": "development"
+                "GO_ENV": "development",
+                "POSTGRES_CONNECTION_STRING": "postgres://postgres:rspp@localhost:5432/coupon?sslmode=disable"
             },
             "buildFlags": [],
             "dlvFlags": [],

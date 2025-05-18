@@ -3,6 +3,7 @@ package coupon
 import (
 	"context"
 	"coupon-system/utils"
+	"net/http"
 
 	"github.com/go-kit/kit/endpoint"
 )
@@ -26,15 +27,16 @@ func makeCreateCouponEndpoint(svc Service) endpoint.Endpoint {
         req := request.(Coupon)
         err := svc.CreateCoupon(ctx, req)
         if err != nil {
-            return map[string]string{"error": err.Error()}, nil
+            er := err.(CommonError)
+            return nil, er
         }
-        return map[string]string{"status": "created"}, nil
+        return SuccessResponse{Code: http.StatusCreated, Message: "coupon created Successfully"}, nil
     }
 }
 
 type ApplicableRequest struct {
-    CartItems  []CartItem `json:"cart_items"`
-    OrderTotal float64    `json:"order_total"`
+    CartItems  []CartItem `json:"cartItems"`
+    OrderTotal float64    `json:"orderTotal"`
     Timestamp  string     `json:"timestamp"`
 }
 
@@ -50,12 +52,12 @@ func makeGetApplicableCouponsEndpoint(svc Service) endpoint.Endpoint {
         var response []map[string]interface{}
         for _, c := range coupons {
             response = append(response, map[string]interface{}{
-                "coupon_code":    c.CouponCode,
-                "discount_value": c.DiscountValue,
+                "couponCode":    c.CouponCode,
+                "discountValue": c.DiscountValue,
             })
         }
 
-        return map[string]interface{}{"applicable_coupons": response}, nil
+        return map[string]interface{}{"applicableCoupons": response}, nil
     }
 }
 

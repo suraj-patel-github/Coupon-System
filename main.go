@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
@@ -13,7 +14,12 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("postgres", "postgres://postgres:rspp@localhost:5432/coupon?sslmode=disable")
+
+	connStr := os.Getenv("POSTGRES_CONNECTION_STRING")
+	if connStr == "" {
+		log.Fatal("Connection string missing env")
+	}
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatalf("Failed to connect to DB: %v", err)
 	}

@@ -2,7 +2,7 @@ package coupon
 
 import (
 	"coupon-system/types"
-	"time"
+	"fmt"
 )
 
 type Coupon struct {
@@ -23,15 +23,15 @@ type Coupon struct {
 }
 
 type CartItem struct {
-	ID       string `json:"id"`
+	Medicine string `json:"medicine"`
 	Category string `json:"category"`
 }
 
 type ValidateRequest struct {
-	CouponCode string     `json:"couponCode"`
-	CartItems  []CartItem `json:"cartItems"`
-	OrderTotal float64    `json:"orderTotal"`
-	Timestamp  time.Time  `json:"timestamp"`
+	CouponCode string         `json:"couponCode"`
+	CartItems  []CartItem     `json:"cartItems"`
+	OrderTotal float64        `json:"orderTotal"`
+	Timestamp  types.DateOnly `json:"timestamp"`
 }
 
 type ValidateResponse struct {
@@ -41,4 +41,18 @@ type ValidateResponse struct {
 		ItemsDiscount   float64 `json:"itemsDiscount,omitempty"`
 		ChargesDiscount float64 `json:"chargesDiscount,omitempty"`
 	} `json:"discount,omitempty"`
+}
+
+type SuccessResponse struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+type CommonError struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+func (e CommonError) Error() string {
+	return fmt.Sprintf("Code: %d, Message: %s", e.Code, e.Message)
 }

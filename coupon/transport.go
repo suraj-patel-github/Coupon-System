@@ -11,19 +11,21 @@ import (
 func NewHTTPHandler(endpoints Endpoints) http.Handler {
     r := http.NewServeMux()
 
-    r.Handle("/admin/coupons", http2.NewServer(
+    basePath := "/v1/coupons"
+
+    r.Handle(basePath+"/admin", http2.NewServer(
         endpoints.CreateCouponEndpoint,
         decodeCreateCouponRequest,
         encodeResponse,
     ))
 
-    r.Handle("/coupons/applicable", http2.NewServer(
+    r.Handle(basePath+"/applicable", http2.NewServer(
         endpoints.GetApplicableCouponsEndpoint,
         decodeApplicableCouponsRequest,
         encodeResponse,
     ))
 
-    r.Handle("/coupons/validate", http2.NewServer(
+    r.Handle(basePath+"/validate", http2.NewServer(
         endpoints.ValidateCouponEndpoint,
         decodeValidateCouponRequest,
         encodeResponse,

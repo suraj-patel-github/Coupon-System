@@ -53,12 +53,8 @@ go mod tidy
 go run cmd/couponservice/main.go
 
 
-
-
 coupon-system/
-├── cmd/
-│   └── couponservice/
-│       └── main.go
+├── main.go
 ├── coupon/
 │   ├── service.go
 │   ├── endpoint.go
@@ -75,14 +71,5 @@ coupon-system/
 ├── Dockerfile
 └── README.md
 
-module github.com/yourusername/coupon-system
-
-go 1.20
-
-require (
-    github.com/go-kit/kit/v0.12.0
-    github.com/gorilla/mux v1.8.1
-    github.com/lib/pq v1.10.9
-    github.com/patrickmn/go-cache v2.1.0+incompatible
-)
-
+# postgresql connection string for local
+export POSTGRES_CONNECTION_STRING="postgres://postgres:rspp@localhost:5432/coupon?sslmode=disable"

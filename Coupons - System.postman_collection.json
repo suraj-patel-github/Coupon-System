@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "4a931c41-aa10-4fd5-82c4-9e955c73f2d4",
+		"name": "Coupons - System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24720037"
+	},
+	"item": [
+		{
+			"name": "create coupon",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"couponCode\": \"XYZ12345\",\n  \"expiryDate\": \"2025-12-10\",\n  \"usageType\": \"one_time\",\n  \"minOrderValue\": 10.0,\n  \"validFrom\": \"2024-12-10\",\n  \"validUntil\": \"2025-12-10\",\n  \"discountType\": \"percentage\", // fixed, percentage\n  \"discountValue\": 50.0, \n  \"maxUsagePerUser\": 1,\n  \"termsAndConditions\": \"Terms and conditions apply.\",\n  \"discountTarget\": \"inventory\",  // inventory, charges\n  \"applicableMedicines\": [\"med1\", \"med2\", \"med3\"],\n  \"applicableCategories\": [\"cat1\", \"cat2\", \"cat3\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/v1/coupons/admin",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"v1",
+						"coupons",
+						"admin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"XYZ12345\",\n  \"expiryDate\": \"2025-12-10\",\n  \"usageType\": \"one_time\",\n  \"minOrderValue\": 10.0,\n  \"validFrom\": \"2024-12-10\",\n  \"validUntil\": \"2025-12-10\",\n  \"discountType\": \"percentage\", // fixed, percentage\n  \"discountValue\": 50.0, \n  \"maxUsagePerUser\": 1,\n  \"termsAndConditions\": \"Terms and conditions apply.\",\n  \"discountTarget\": \"inventory\",  // inventory, charges\n  \"applicableMedicines\": [\"med1\", \"med2\", \"med3\"],\n  \"applicableCategories\": [\"cat1\", \"cat2\", \"cat3\"]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/v1/coupons/admin",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"v1",
+								"coupons",
+								"admin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 06:49:45 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 201,\n    \"message\": \"coupon created Successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "applicable coupons",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cartItems\": [\n        {\"medicine\": \"med1\", \"category\": \"cat1\"}\n    ],\n    \"orderTotal\": 700,\n    \"timestamp\": \"2025-08-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/v1/coupons/applicable",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"v1",
+						"coupons",
+						"applicable"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cartItems\": [\n        {\"medicine\": \"med1\", \"category\": \"cat1\"}\n    ],\n    \"orderTotal\": 700,\n    \"timestamp\": \"2025-08-10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/v1/coupons/applicable",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"v1",
+								"coupons",
+								"applicable"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 07:29:21 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "156"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"applicableCoupons\": [\n        {\n            \"couponCode\": \"XYZ1234\",\n            \"discountValue\": 50\n        },\n        {\n            \"couponCode\": \"XYZ12345\",\n            \"discountValue\": 50\n        },\n        {\n            \"couponCode\": \"XYZ123\",\n            \"discountValue\": 50\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get coupon by code",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"couponCode\": \"XYZ1234\",\n    \"cartItems\": [\n        {\"medicine\": \"med1\", \"category\": \"cat1\"}\n    ],\n    \"OrderTotal\": 1099,\n    \"timestamp\": \"2025-10-12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/v1/coupons/validate",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"v1",
+						"coupons",
+						"validate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"couponCode\": \"XYZ1234\",\n    \"cartItems\": [\n        {\"medicine\": \"med1\", \"category\": \"cat1\"}\n    ],\n    \"OrderTotal\": 1099,\n    \"timestamp\": \"2025-10-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/v1/coupons/validate",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"v1",
+								"coupons",
+								"validate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 07:52:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "92"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isValid\": true,\n    \"message\": \"coupon applied successfully\",\n    \"discount\": {\n        \"itemsDiscount\": 549.5\n    }\n}"
+				}
+			]
+		}
+	]
+}

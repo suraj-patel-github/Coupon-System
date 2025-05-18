@@ -29,7 +29,7 @@ func validateCoupon(c Coupon, cartItems []CartItem, orderTotal float64, now time
 		found := false
 		for _, item := range cartItems {
 			for _, med := range c.ApplicableMedicines {
-				if item.ID == med {
+				if item.Medicine == med {
 					found = true
 					break
 				}

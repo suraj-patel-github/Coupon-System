@@ -24,7 +24,6 @@ This is a Coupon System MVP built using **GoKit** and **PostgreSQL**, designed f
 
 | Folder        | Purpose                              |
 | ------------- | ------------------------------------ |
-| `cmd/`        | Main application entry               |
 | `coupon/`     | Business logic, endpoints, transport |
 | `db/`         | DB schema scripts                    |
 | `pkg/`        | Caching utilities                    |

@@ -1,6 +1,6 @@
-# Coupon System MVP (GoKit + PostgreSQL)
+# Coupon System (GoKit + PostgreSQL)
 
-This is a Coupon System MVP built using **GoKit** and **PostgreSQL**, designed for a medicine ordering platform.
+This is a Coupon System built using **GoKit** and **PostgreSQL**, designed for a medicine ordering platform.
 
 ---
 
@@ -41,7 +41,7 @@ This is a Coupon System MVP built using **GoKit** and **PostgreSQL**, designed f
 
 ```bash
 # Clone repo
-git clone https://coupon-system.git
+git clone git@github.com:suraj-patel-github/Coupon-System.git
 cd coupon-system
 
 # Run DB
@@ -49,7 +49,7 @@ psql -U postgres -f db/schema.sql
 
 # Build & run
 go mod tidy
-go run cmd/couponservice/main.go
+go run main.go
 
 
 coupon-system/
